@@ -1,10 +1,8 @@
-﻿namespace Virtual.Password.Console.Catalog.Implementations
+﻿namespace Virtual.Password.Console.Catalog.Implementations;
+
+public class LowerCaseLettersCatalog : AbstractStringCatalog
 {
-    public class LowerCaseLettersCatalog : AbstractStringCatalog
-    {
-        public override string Contents
-        {
-            get { return "abcdefghijklmnopqrstuvwxyz"; }
-        }
-    }
+    // ReSharper disable once StringLiteralTypo
+    public override string Contents => "abcdefghijklmnopqrstuvwxyz";
+    // ReSharper restore StringLiteralTypo
 }

@@ -1,8 +1,7 @@
-﻿namespace Virtual.Password.Console.Random
+﻿namespace Virtual.Password.Console.Random;
+
+public enum RandomGeneratorType
 {
-    public enum RandomGeneratorType
-    {
-        Basic,
-        Strong
-    }
+    Basic,
+    Strong
 }

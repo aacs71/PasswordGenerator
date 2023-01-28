@@ -1,33 +1,21 @@
 ﻿using Virtual.Password.Console.Catalog.Implementations;
 
-namespace Virtual.Password.Console.Catalog
+namespace Virtual.Password.Console.Catalog;
+
+public static class StringCatalogFactory
 {
-    public static class StringCatalogFactory
+    private const CatalogType DEFAULT_CATALOG_TYPE = CatalogType.AlphaNumeric;
+
+    public static ICatalog<string> Create(CatalogType type = DEFAULT_CATALOG_TYPE)
     {
-        private const CatalogType DEFAULT_CATALOG_TYPE = CatalogType.AlphaNumeric;
-
-        public static ICatalog<string> Create()
+        return type switch
         {
-            return Create(DEFAULT_CATALOG_TYPE);
-        }
-
-        public static ICatalog<string> Create(CatalogType type)
-        {
-            switch (type)
-            {
-                case CatalogType.CommonCharecters:
-                    return new CommonCharactersCatalog();
-                case CatalogType.PrintableCharacters:
-                    return new PrintableCharactersCatalog();
-                case CatalogType.AlphaNumeric:
-                    return new AlphaNumericCatalog();
-                case CatalogType.LowerCase:
-                    return new LowerCaseLettersCatalog();
-                case CatalogType.UpperCase:
-                    return new UpperCaseLettersCatalog();
-            }
-
-            throw new InvalidCatalogTypeException();
-        }
+            CatalogType.CommonCharacters => new CommonCharactersCatalog(),
+            CatalogType.PrintableCharacters => new PrintableCharactersCatalog(),
+            CatalogType.AlphaNumeric => new AlphaNumericCatalog(),
+            CatalogType.LowerCase => new LowerCaseLettersCatalog(),
+            CatalogType.UpperCase => new UpperCaseLettersCatalog(),
+            _ => throw new InvalidCatalogTypeException()
+        };
     }
 }

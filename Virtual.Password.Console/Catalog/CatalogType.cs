@@ -1,11 +1,10 @@
-﻿namespace Virtual.Password.Console.Catalog
+﻿namespace Virtual.Password.Console.Catalog;
+
+public enum CatalogType
 {
-    public enum CatalogType
-    {
-        CommonCharecters,
-        PrintableCharacters,
-        AlphaNumeric,
-        LowerCase,
-        UpperCase
-    }
+    CommonCharacters,
+    PrintableCharacters,
+    AlphaNumeric,
+    LowerCase,
+    UpperCase
 }

@@ -1,41 +1,58 @@
 ﻿using CommandLine;
+using CommandLine.Text;
 using Virtual.Password.Console.Catalog;
 using Virtual.Password.Console.Policy;
 using Virtual.Password.Console.Random;
 using Virtual.Password.Console.Strategies;
 using Virtual.Password.Console.Strategies.Implementations;
 
-namespace Virtual.Password.Console
+namespace Virtual.Password.Console;
+
+public class PasswordGeneratorArguments
 {
-    public class PasswordGeneratorArguments
-    {
-        [Argument(ArgumentType.AtMostOnce,
-            HelpText =
-                "Catálogo de dados (CommonCharecters | PrintableCharacters | AlphaNumeric | LowerCase | UpperCase.)",
-            DefaultValue = CatalogType.AlphaNumeric)] public CatalogType Catalog;
+    [Usage(ApplicationAlias = "password-generator")]
+    public static IEnumerable<Example> Usage =>
+        new List<Example>
+        {
+            new("Generate a password depending on the arguments", new PasswordGeneratorArguments
+            {
+                Catalog = CatalogType.AlphaNumeric,
+                Count = 10,
+                LengthPolicy = LengthStrategyType.Fixed,
+                RandomGeneration = RandomGeneratorType.Strong
+            })
+        };
 
-        [Argument(ArgumentType.AtMostOnce, HelpText = "Número de passwords a gerar.", DefaultValue = 1)] public int
-            Count;
+    [Option("Catalog", Required = false, Default = CatalogType.AlphaNumeric,
+        HelpText =
+            "Characters catalog type (CommonCharecters, PrintableCharacters, AlphaNumeric, LowerCase, UpperCase")]
+    public CatalogType Catalog { get; set; }
 
-        [Argument(ArgumentType.AtMostOnce, HelpText = "Política para comprimento da password (Fixed | Variable).",
-            DefaultValue = LengthStrategyType.Fixed)] public LengthStrategyType LengthPolicy;
+    [Option("Count", Default = 1, HelpText = "Número de passwords a gerar.")]
+    public int Count { get; set; }
 
-        [Argument(ArgumentType.AtMostOnce, HelpText = "Comprimento máximo da password a gerar.",
-            DefaultValue = VariableLengthStrategy.DEFAULT_MAX_PASSWORD_LENGTH)] public int MaxPasswordLength;
+    [Option("LengthPolicy", Required = false, Default = LengthStrategyType.Fixed,
+        HelpText = "Política para comprimento da password (Fixed | Variable)")]
+    public LengthStrategyType LengthPolicy { get; set; }
 
-        [Argument(ArgumentType.AtMostOnce, HelpText = "Comprimento mínimo da password a gerar.",
-            DefaultValue = VariableLengthStrategy.DEFAULT_MIN_PASSWORD_LENGTH)] public int MinPasswordLength;
+    [Option("MaxPasswordLength", Default = VariableLengthStrategy.DEFAULT_MAX_PASSWORD_LENGTH,
+        HelpText = "Comprimento máximo da password a gerar.")]
+    public int MaxPasswordLength { get; set; }
 
-        [Argument(ArgumentType.AtMostOnce, HelpText = "Comprimento da password a gerar.",
-            DefaultValue = FixedLengthStrategy.DEFAULT_PASSWORD_LENGTH)] public int PasswordLength;
+    [Option("MinPasswordLength", Default = VariableLengthStrategy.DEFAULT_MIN_PASSWORD_LENGTH,
+        HelpText = "Comprimento mínimo da password a gerar.")]
+    public int MinPasswordLength { get; set; }
 
-        [Argument(ArgumentType.AtMostOnce,
-            HelpText =
-                "Politica de geração da password (Default | Medium | Strong). Nota: Tem precedências sobre os outros parâmetros"
-            ,
-            ShortName = "pol", DefaultValue = PasswordPolicyType.User)] public PasswordPolicyType PasswordPolicy;
+    [Option("PasswordLength", Default = FixedLengthStrategy.DEFAULT_PASSWORD_LENGTH,
+        HelpText = "Comprimento da password a gerar.")]
+    public int PasswordLength { get; set; }
 
-        [Argument(ArgumentType.AtMostOnce, HelpText = "Algoritmo de geração de aleatórios (Basic | Strong).",
-            ShortName = "rg", DefaultValue = RandomGeneratorType.Strong)] public RandomGeneratorType RandomGeneration;
-    }
+    [Option("PasswordPolicy", Default = PasswordPolicyType.User,
+        HelpText =
+            "Politica de geração da password (Default | Medium | Strong). Nota: Tem precedências sobre os outros parâmetros.")]
+    public PasswordPolicyType PasswordPolicy { get; set; }
+
+    [Option("RandomGeneration", Default = RandomGeneratorType.Strong,
+        HelpText = "Algoritmo de geração de aleatórios (Basic | Strong).")]
+    public RandomGeneratorType RandomGeneration { get; set; }
 }

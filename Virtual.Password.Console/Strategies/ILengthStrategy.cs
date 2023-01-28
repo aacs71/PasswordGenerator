@@ -1,7 +1,6 @@
-﻿namespace Virtual.Password.Console.Strategies
+﻿namespace Virtual.Password.Console.Strategies;
+
+public interface ILengthStrategy
 {
-    public interface ILengthStrategy
-    {
-        int Max { get; }
-    }
+    int Max { get; }
 }

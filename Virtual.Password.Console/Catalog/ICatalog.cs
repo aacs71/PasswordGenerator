@@ -1,9 +1,8 @@
-﻿namespace Virtual.Password.Console.Catalog
+﻿namespace Virtual.Password.Console.Catalog;
+
+public interface ICatalog<T>
 {
-    public interface ICatalog<T>
-    {
-        T Contents { get; }
-        long Size { get; }
-        T GetItemAt(long position);
-    }
+    T Contents { get; }
+    long Size { get; }
+    T GetItemAt(long position);
 }

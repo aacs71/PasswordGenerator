@@ -1,8 +1,7 @@
-﻿namespace Virtual.Password.Console.Random
+﻿namespace Virtual.Password.Console.Random;
+
+public interface IRandomGenerator<T>
 {
-    public interface IRandomGenerator<T>
-    {
-        T GenerateUntil(T upper);
-        T GenerateBetween(T lower, T upper);
-    }
+    T GenerateUntil(T upper);
+    T GenerateBetween(T lower, T upper);
 }

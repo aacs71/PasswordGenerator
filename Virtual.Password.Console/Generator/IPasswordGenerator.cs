@@ -1,7 +1,6 @@
-﻿namespace Virtual.Password.Console.Generator
+﻿namespace Virtual.Password.Console.Generator;
+
+public interface IPasswordGenerator<TCatalog>
 {
-    public interface IPasswordGenerator<TCatalog>
-    {
-        TCatalog Generate();
-    }
+    TCatalog Generate();
 }

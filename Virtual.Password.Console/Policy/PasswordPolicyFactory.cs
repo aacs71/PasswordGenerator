@@ -1,28 +1,18 @@
 ﻿using Virtual.Password.Console.Policy.Implementations;
 
-namespace Virtual.Password.Console.Policy
+namespace Virtual.Password.Console.Policy;
+
+public static class PasswordPolicyFactory
 {
-    public static class PasswordPolicyFactory
+    public static IPasswordPolicy<string, int> Create(PasswordPolicyType type = PasswordPolicyType.Default)
     {
-        public static IPasswordPolicy<string, int> Create()
+        return type switch
         {
-            return null;
-        }
-
-        public static IPasswordPolicy<string, int> Create(PasswordPolicyType type)
-        {
-            switch (type)
-            {
-                case PasswordPolicyType.User:
-                case PasswordPolicyType.Default:
-                    return new DefaultStringPasswordPolicy();
-                case PasswordPolicyType.Medium:
-                    return new MediumStringPasswordPolicy();
-                case PasswordPolicyType.Strong:
-                    return new StrongStringPasswordPolicy();
-            }
-
-            throw new InvalidPasswordPolicyTypeException();
-        }
+            PasswordPolicyType.User => new DefaultStringPasswordPolicy(),
+            PasswordPolicyType.Default => new DefaultStringPasswordPolicy(),
+            PasswordPolicyType.Medium => new MediumStringPasswordPolicy(),
+            PasswordPolicyType.Strong => new StrongStringPasswordPolicy(),
+            _ => throw new InvalidPasswordPolicyTypeException()
+        };
     }
 }

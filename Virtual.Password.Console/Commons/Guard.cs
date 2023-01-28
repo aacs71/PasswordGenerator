@@ -1,14 +1,11 @@
-﻿using System;
+﻿namespace Virtual.Password.Console.Commons;
 
-namespace Virtual.Password.Console.Commons
+public static class Guard
 {
-    public static class Guard
+    public static void Against(bool assertion, string message)
     {
-        public static void Against(bool assertion, string message)
-        {
-            if (!assertion) return;
+        if (!assertion) return;
 
-            throw new InvalidOperationException(message);
-        }
+        throw new InvalidOperationException(message);
     }
 }

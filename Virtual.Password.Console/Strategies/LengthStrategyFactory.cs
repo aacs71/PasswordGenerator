@@ -1,27 +1,18 @@
 ﻿using Virtual.Password.Console.Strategies.Implementations;
 
-namespace Virtual.Password.Console.Strategies
+namespace Virtual.Password.Console.Strategies;
+
+public static class LengthStrategyFactory
 {
-    public static class LengthStrategyFactory
+    private const LengthStrategyType LENGTH_STRATEGY_TYPE = LengthStrategyType.Fixed;
+
+    public static ILengthStrategy Create(LengthStrategyType type = LENGTH_STRATEGY_TYPE)
     {
-        private const LengthStrategyType LENGTH_STRATEGY_TYPE = LengthStrategyType.Fixed;
-
-        public static ILengthStrategy Create()
+        return type switch
         {
-            return Create(LENGTH_STRATEGY_TYPE);
-        }
-
-        public static ILengthStrategy Create(LengthStrategyType type)
-        {
-            switch (type)
-            {
-                case LengthStrategyType.Fixed:
-                    return new FixedLengthStrategy();
-                case LengthStrategyType.Variable:
-                    return new VariableLengthStrategy();
-            }
-
-            throw new InvalidLengthTypeStrategyException();
-        }
+            LengthStrategyType.Fixed => new FixedLengthStrategy(),
+            LengthStrategyType.Variable => new VariableLengthStrategy(),
+            _ => throw new InvalidLengthTypeStrategyException()
+        };
     }
 }

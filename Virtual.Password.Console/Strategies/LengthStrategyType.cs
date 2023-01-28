@@ -1,8 +1,7 @@
-﻿namespace Virtual.Password.Console.Strategies
+﻿namespace Virtual.Password.Console.Strategies;
+
+public enum LengthStrategyType
 {
-    public enum LengthStrategyType
-    {
-        Fixed,
-        Variable
-    }
+    Fixed,
+    Variable
 }

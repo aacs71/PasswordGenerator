@@ -1,10 +1,8 @@
-﻿namespace Virtual.Password.Console.Catalog.Implementations
+﻿namespace Virtual.Password.Console.Catalog.Implementations;
+
+public class AlphaNumericCatalog : AbstractStringCatalog
 {
-    public class AlphaNumericCatalog : AbstractStringCatalog
-    {
-        public override string Contents
-        {
-            get { return "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"; }
-        }
-    }
+    // ReSharper disable StringLiteralTypo
+    public override string Contents => "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    // ReSharper restore StringLiteralTypo
 }
